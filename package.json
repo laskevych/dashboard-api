@@ -1,0 +1,23 @@
+{
+  "name": "dashboard-api",
+  "version": "1.0.0",
+  "description": "Init test",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laskevych/dashboard-api.git"
+  },
+  "author": "Andrew Laskevych",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laskevych/dashboard-api/issues"
+  },
+  "homepage": "https://github.com/laskevych/dashboard-api#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
