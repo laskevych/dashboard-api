@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { BaseController } from "../common/base.controller.js"
+import { HTTPError } from "../errors/http-error.class.js";
 import { LoggerService } from "../logger/logger.service.js"
 
 export class UserController extends BaseController {
@@ -25,6 +26,6 @@ export class UserController extends BaseController {
     }
 
     register(req: Request, res: Response, next: NextFunction) {
-        this.ok(res, 'register');
+        next(new HTTPError(404, 'Register is bloked.'));
     }
 }
