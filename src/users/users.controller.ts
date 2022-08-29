@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import { inject, injectable } from 'inversify';
-import { BaseController } from '../common/base.controller.js';
-import { HTTPError } from '../errors/http-error.class.js';
-import { ILogger } from '../logger/logger.interface.js';
-import { TYPES } from '../types.js';
+import { BaseController } from '../common/base.controller';
+import { HTTPError } from '../errors/http-error.class';
+import { ILogger } from '../logger/logger.interface';
+import { TYPES } from '../types';
+import { IUserController } from './users.controller.interface';
 import 'reflect-metadata';
-import { IUserController } from './users.controller.interface.js';
 
 @injectable()
 export class UserController extends BaseController implements IUserController {
@@ -27,6 +27,7 @@ export class UserController extends BaseController implements IUserController {
 	}
 
 	login(req: Request, res: Response, next: NextFunction): void {
+		console.log('test');
 		next(new HTTPError(404, 'Authorization is bloked.'));
 	}
 
