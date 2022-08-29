@@ -22,10 +22,10 @@ export class UserController extends BaseController {
     }
 
     login(req: Request, res: Response, next: NextFunction) {
-        this.ok(res, 'login');
+        next(new HTTPError(404, 'Authorization is bloked.'));
     }
 
     register(req: Request, res: Response, next: NextFunction) {
-        next(new HTTPError(404, 'Register is bloked.'));
+        this.ok(res, 'login');
     }
 }

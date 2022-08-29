@@ -1,6 +1,6 @@
 import express, { Express } from "express";
 import { Server } from "http";
-import { IExeptionFilter } from "./errors/exeption.fileter.interface";
+import { ExeptionFilter } from "./errors/exeption.filer";
 import { LoggerService } from "./logger/logger.service";
 import { UserController } from "./users/users.controller";
 
@@ -11,17 +11,18 @@ export class App {
     port: number;
     logger: LoggerService
     userController: UserController
-    exeptionFilter: IExeptionFilter
+    exeptionFilter: ExeptionFilter
 
     constructor(
         logger: LoggerService,
         userController: UserController,
-        exeptionFilter: IExeptionFilter
+        exeptionFilter: ExeptionFilter
     ) {
         this.app = express();
         this.port = 8000;
         this.logger = logger;
         this.userController = userController;
+        this.exeptionFilter = exeptionFilter;
     }
 
     useRoutes() {
@@ -34,6 +35,8 @@ export class App {
 
     public async init() {
         this.useRoutes();
+        this.useExeptionHandler();
+        
 
         this.server = this.app.listen(this.port);
         this.logger.log(`Server are working on http://localhost:${this.port}/`);
