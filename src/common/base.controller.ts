@@ -26,7 +26,7 @@ export abstract class BaseController {
 
      protected bindRoutes(routes: IControllerRoute[]) {
         for (const route of routes) {
-            this.logger.log(`Init router. Method: ${route.method.toUpperCase}; Path: ${route.path.toLocaleLowerCase}`)
+            this.logger.log(`Init router. Method: ${route.method.toUpperCase()}; Path: ${route.path.toLocaleLowerCase()}`)
 
             const handler = route.func.bind(this);
 
