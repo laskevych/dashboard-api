@@ -5,7 +5,10 @@ import { ILogger } from './logger/logger.interface';
 import { UserController } from './users/users.controller';
 import { TYPES } from './types';
 import { IExeptionFilter } from './errors/exeption.filter.interface';
+import { json } from 'body-parser';
+
 import 'reflect-metadata';
+import bodyParser from 'body-parser';
 
 @injectable()
 export class App {
@@ -22,6 +25,10 @@ export class App {
 		this.port = 8000;
 	}
 
+	useMiddleware(): void {
+		this.app.use(json());
+	}
+
 	useRoutes(): void {
 		this.app.use('/users', this.userController.router);
 	}
@@ -31,6 +38,7 @@ export class App {
 	}
 
 	public async init(): Promise<void> {
+		this.useMiddleware();
 		this.useRoutes();
 		this.useExeptionHandler();
 
