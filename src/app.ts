@@ -9,6 +9,7 @@ import { json } from 'body-parser';
 
 import 'reflect-metadata';
 import bodyParser from 'body-parser';
+import { IConfigService } from './config/config.service.interface';
 
 @injectable()
 export class App {
@@ -20,6 +21,7 @@ export class App {
 		@inject(TYPES.Logger) private logger: ILogger,
 		@inject(TYPES.UserController) private userController: UserController,
 		@inject(TYPES.ExeptionFilter) private exeptionFilter: IExeptionFilter,
+		@inject(TYPES.ConfigService) private configService: IConfigService,
 	) {
 		this.app = express();
 		this.port = 8000;
