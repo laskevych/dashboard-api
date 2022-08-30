@@ -15,7 +15,7 @@ import { IUserService } from './users.service.interface';
 export class UserController extends BaseController implements IUserController {
 	constructor(
 		@inject(TYPES.Logger) protected loggerService: ILogger,
-		@inject(TYPES.UserService) protected userService: IUserService
+		@inject(TYPES.UserService) protected userService: IUserService,
 	) {
 		super(loggerService);
 
@@ -37,13 +37,17 @@ export class UserController extends BaseController implements IUserController {
 		next(new HTTPError(404, 'Authorization is bloked.'));
 	}
 
-	async register({ body }: Request<{}, {}, UserRegisterDto>, res: Response, next: NextFunction): Promise<void> {
+	async register(
+		{ body }: Request<{}, {}, UserRegisterDto>,
+		res: Response,
+		next: NextFunction,
+	): Promise<void> {
 		const result = await this.userService.createUser(body);
 
 		if (!result) {
 			return next(new HTTPError(422, 'This user is exists.'));
 		}
 
-		this.ok(res, { name: result.name, email: result.email});
+		this.ok(res, { name: result.name, email: result.email });
 	}
 }

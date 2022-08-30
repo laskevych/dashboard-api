@@ -33,9 +33,12 @@ export abstract class BaseController {
 				`Init router. Method: ${route.method.toUpperCase()}; Path: ${route.path.toLocaleLowerCase()}`,
 			);
 
+			const middlewares = route.middlewares?.map((m) => m.execute.bind(m));
 			const handler = route.func.bind(this);
 
-			this._router[route.method](route.path, handler);
+			const pipeline = middlewares ? [...middlewares, handler] : handler;
+
+			this._router[route.method](route.path, pipeline);
 		}
 	}
 }
