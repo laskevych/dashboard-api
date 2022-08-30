@@ -8,10 +8,11 @@ import { IUserController } from './users.controller.interface';
 import 'reflect-metadata';
 import { UserLoginDto } from './dto/user.login.dto';
 import { UserRegisterDto } from './dto/user.register.dto';
+import { User } from './user.entity';
 
 @injectable()
 export class UserController extends BaseController implements IUserController {
-	constructor(@inject(TYPES.ILogger) private loggerService: ILogger) {
+	constructor(@inject(TYPES.ILogger) protected loggerService: ILogger) {
 		super(loggerService);
 
 		this.bindRoutes([
@@ -32,8 +33,10 @@ export class UserController extends BaseController implements IUserController {
 		next(new HTTPError(404, 'Authorization is bloked.'));
 	}
 
-	register(req: Request<{}, {}, UserRegisterDto>, res: Response, next: NextFunction): void {
-		console.log(req.body);
-		this.ok(res, 'login');
+	async register({ body }: Request<{}, {}, UserRegisterDto>, res: Response, next: NextFunction): Promise<void> {
+		const newUser = new User(body.name, body.email);
+		newUser.setPassword(body.password);
+		
+		this.ok(res, 'register');
 	}
 }

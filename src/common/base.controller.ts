@@ -6,7 +6,7 @@ import 'reflect-metadata';
 
 @injectable()
 export abstract class BaseController {
-	private logger: ILogger;
+	protected logger: ILogger;
 	private readonly _router: Router;
 
 	constructor(logger: ILogger) {
