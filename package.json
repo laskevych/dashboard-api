@@ -11,7 +11,8 @@
     "lint": "eslint ./src/**",
     "lint:fix": "eslint ./src/** --fix",
     "start": "tsc && node ./dist/main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clinic": "clinic doctor --on-port 'autocannon -m POST localhost:8000/users/register' -- node dist/main.js"
   },
   "repository": {
     "type": "git",

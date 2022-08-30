@@ -27,7 +27,6 @@ export class UserController extends BaseController implements IUserController {
 	}
 
 	login(req: Request, res: Response, next: NextFunction): void {
-		console.log('test');
 		next(new HTTPError(404, 'Authorization is bloked.'));
 	}
 
